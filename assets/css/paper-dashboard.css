@@ -1,17 +1,17 @@
 /*!
-    
+
  =========================================================
  * Paper Dashboard - v1.1.2
  =========================================================
- 
+
  * Product Page: http://www.creative-tim.com/product/paper-dashboard
  * Copyright 2017 Creative Tim (http://www.creative-tim.com)
  * Licensed under MIT (https://github.com/creativetimofficial/paper-dashboard/blob/master/LICENSE.md)
- 
+
  =========================================================
- 
+
  * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
- 
+
  */
 /*      light colors - used for select dropdown         */
 .ct-blue {
@@ -990,8 +990,8 @@ textarea.form-control {
 .table .checkbox {
   margin-top: 0;
   margin-bottom: 22px;
-  padding: 0;
-  width: 15px; }
+  /*padding: 0;*/
+  width: 100%; }
 .table > thead > tr > th,
 .table > tbody > tr > th,
 .table > tfoot > tr > th,

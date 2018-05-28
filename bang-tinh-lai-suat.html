@@ -25,7 +25,7 @@
                 <a href="/" class="simple-text">Credit Panel</a>
             </div>
             <ul class="nav">
-                <li class="active">
+                <li>
                     <a href="/">
                         <i class="ti-headphone-alt"></i>
                         <p>Đăng ký tư vấn</p>
@@ -37,7 +37,7 @@
                         <p>Liên hệ trực tiếp</p>
                     </a>
                 </li>
-                <li>
+                <li class="active">
                     <a href="/bang-tinh-lai-suat.html">
                         <i class="fa fa-calculator"></i>
                         <p>Bảng tính lãi suất</p>
@@ -57,7 +57,7 @@
                         <span class="icon-bar bar2"></span>
                         <span class="icon-bar bar3"></span>
                     </button>
-                    <a class="navbar-brand" href="/">Đăng ký tư vấn</a>
+                    <a class="navbar-brand" href="/">Bảng tính lãi suất</a>
                 </div>
                 <div class="collapse navbar-collapse"><!--side bar--></div>
             </div>
@@ -67,38 +67,39 @@
             <div class="container-fluid">
                 <div class="card">
                     <div class="row">
-                        <div class="col-md-8">
+                        <div class="col-md-6">
                             <div class="header">
-                                <h4 class="title">Vay tín chấp</h4><br>
-                                <p class="category">Bạn đang có nhu cầu tài chính mà không thể yêu cầu giúp đỡ từ bạn bè hay người thân, chúng tôi hỗ trợ vay tín chấp ngân hàng tại 53 tỉnh thành trên cả nước, số tiền vay lên đến 500 triệu, lãi suất thấp nhất tính theo dư nợ giảm dần. Hộ khẩu tỉnh nào cũng vay, bảo mật thông tin khách hàng. <br></p>
+                                <h4 class="title">Tính lãi suất theo dự nợ giảm dần</h4><br>
+                                <p class="category">Vui lòng nhập đầy đủ các thông tin bên dưới để biết tổng số tiền bạn sẽ trả góp hàng tháng.</p>
                             </div>
-                            <div class="content" style="font-size: 15px">
-                                <h5>Vay tín chấp ngân hàng có những ưu việt</h5>
-                                ✔ Giải ngân nhanh.<br>
-                                ✔ Lãi suất khá mềm và có nhiều sự lựa chọn cho khách hàng.<br>
-                                ✔ Bảo mật thông tin khoản vay  tốt.<br>
-                                ✔ Không cần thế chấp bất kì tài sản nào cũng như giấy tờ gốc của khách hàng.<br>
-                                ✔ Các thủ tục nhanh gọn ko rườm rà.<br>
-                                ✔ Không cần vợ hoặc chồng cùng kí tên vay vốn đối với ngân hàng.<br>
-                                ✔ Không mất bất kì 1 loại phụ phí nào kèm theo ( so với đi vay thế chấp tài sản ).<br>
-                                ✔ Khoản vay được phê duyệt lên đến 500tr và thời gian vay 60 tháng.<br>
-                                ✔ Các hình thức cho vay khá đa dạng và phù hợp với nhiều tầng lớp khác nhau.<br>
+                            <div class="content">
+                                <div class="row">
+                                    <div ng-include="'/template/calculate.html'"></div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="card">
+                <div class="card" ng-show="tableLend.length">
                     <div class="row">
                         <div class="col-md-8">
-                            <div class="header">
-                                <h4 class="title">Đăng ký thông tin tư vấn</h4><br>
-                                <p class="category">Bạn có thể <a href="/lien-he.html">liên hệ</a> trực tiếp đến chúng tôi hoặc vui lòng để lại thông tin dưới đây để nhận được sự tư vấn.</p>
-                            </div>
-                            <div class="content">
-                                <h5>Hotline 0981805006 hoặc 0937431936</h5>
-                                <div class="row">
-                                    <div ng-include="'/template/register.html'"></div>
-                                </div>
+                            <div class="content table-responsive table-full-width">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <th><strong>Kỳ thanh toán</strong></th>
+                                        <th><strong>Gốc</strong></th>
+                                        <th><strong>Lãi</strong></th>
+                                        <th><strong>Tổng gốc + lãi</strong></th>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="item in tableLend">
+                                            <td>{{ item.ky }}</td>
+                                            <td>{{ item.goc | number }}</td>
+                                            <td>{{ item.lai | number }}</td>
+                                            <td>{{ item.goc + item.lai | number }}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>

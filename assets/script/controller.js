@@ -1,92 +1,88 @@
 'use strict';
 
 app.controller('controller', function (
-    PAGE, API, $timeout,
+    API, $timeout,
     $scope, $firebaseArray,
-    $firebaseObject, $http, Notify) {
+    $http, Notify) {
 
     var db              = firebase.database();
-    $scope.account      = $firebaseArray(db.ref('account/'));
-    $scope.PAGE         = PAGE;
-    $scope.step         = PAGE.LOGIN;
-    $scope.title        = '';
-    $scope.subTitle     = '';
-    $scope.show_loading = true;
-    $scope.user         = { email: '', password: '' };
-    $scope.isLogin      = $scope.step !== PAGE.LOGIN &&
-                         $scope.step !== PAGE.REGISTER;
+    $scope.waiting      = $firebaseArray(db.ref('waiting/'));
+    $scope.show_loading = false;
+    $scope.user         = {};
+    $scope.lend         = {};
+    $scope.tableLend    = [];
 
-    $scope.login = function()
-    {
-        firebase.auth().signInWithEmailAndPassword($scope.user.email, $scope.user.password).then(function(res) {
-            $scope.isLogin = true;
-        }).catch(function(er) {
-            return Notify.error(er.message);
-        });
-    };
+    $scope.typeReceive  = [
+        { id: 1, name: 'Chuyển khoản qua ngân hàng' },
+        { id: 2, name: 'Nhận tiền mặt' }
+    ];
 
     $scope.register = function()
     {
-        if (!$scope.login_username || !$scope.login_password) return Notify.error('Tên đăng nhập & mật khẩu không được để trống!!!');
+        $scope.user.called = false;
+        $scope.user.date   = now();
         loading.show();
-        firebase.auth().createUserWithEmailAndPassword($scope.login_username, $scope.login_password).then(function(res) {
-            loading.hide();
-        }).catch(function(er) {
-            loading.hide();
-            if (er) return Notify.error(er.message);
-        });
-    };
-
-    $scope.logout = function()
-    {
-        firebase.auth().signOut().then(function() {
-            $scope.isLogin = false;
-            $scope.step    = PAGE.LOGIN;
-        }).catch(function(error) {
-            return Notify.error(error.message);
-        });
-    };
-
-    firebase.auth().onAuthStateChanged(function(user)
-    {
+        $scope.waiting.$add($scope.user);
         loading.hide();
-        if (! user) return;
-        if (! user.emailVerified) return verifyEmail(user);
-        $scope.isLogin = true;
-        $scope.step    = PAGE.PEOPLE_BORROW;
-    });
-
-    var verifyEmail = function(user)
-    {
-        user.sendEmailVerification();
-        return Notify.info('Vui lòng kiểm tra email để xác thực tài khoản của bạn.');
+        Notify.success('Đăng ký nhận tư vấn thành công, chúng tôi sẽ liên hệ sau ít phút.');
+        $scope.user = {};
     };
 
-    $scope.$watch('step', function()
+    $scope.updateStatus = function(id)
     {
-        switch ($scope.step) {
-            case PAGE.LOGIN:
-                $scope.title = 'Đăng nhập';
-                break;
-            case PAGE.REGISTER:
-                $scope.title = 'Đăng ký';
-                break;
-            case PAGE.FINISH_PROFILE:
-                $scope.title = 'Hoàn thành thông tin cá nhân';
-                break;
-            case PAGE.PEOPLE_BORROW:
-                $scope.title = 'Người cần vay';
-                break;
-            case PAGE.PEOPLE_SUPPORT:
-                $scope.title = 'Người tư vấn';
-                break;
-            case PAGE.PROFILE:
-                $scope.title = 'Thông tin cá nhân';
-                break;
-            default:
-                break;
+        var index                    = indexOfArr(id);
+        $scope.waiting[index].called = $scope.waiting[index].called ? false : true;
+        $scope.waiting.$save(index);
+    };
+
+    $scope.calculate = function()
+    {
+        $scope.tableLend = [];
+        var totalMoney = $scope.lend.totalMoney;
+        var goc_moi_thang = Math.round(totalMoney / $scope.lend.totalMonth);
+        var lai_moi_thang = Math.round(totalMoney * ($scope.lend.percent / 100) / $scope.lend.totalMonth);
+        totalMoney = totalMoney - goc_moi_thang;
+
+        $scope.tableLend.push({
+            ky: 'Kỳ thứ 1',
+            goc: goc_moi_thang,
+            lai: lai_moi_thang,
+            tong: goc_moi_thang + lai_moi_thang
+        });
+
+        for (var i = 2; i <= $scope.lend.totalMonth; i++) {
+            lai_moi_thang = Math.round(totalMoney * ($scope.lend.percent / 100) / $scope.lend.totalMonth);
+            $scope.tableLend.push({
+                ky: 'Kỳ thứ ' + i,
+                goc: goc_moi_thang,
+                lai: lai_moi_thang,
+                tong: goc_moi_thang + lai_moi_thang
+            });
+            totalMoney = totalMoney - goc_moi_thang;
         }
-    });
+    };
+
+    function indexOfArr(id)
+    {
+        var result = null;
+        angular.forEach($scope.waiting, function(value, key) {
+            if (value.$id === id) {
+                return result = key;
+            }
+        });
+        return result;
+    };
+
+    function now()
+    {
+        var currentdate = new Date();
+        return currentdate.getDate() + "/"
+                + (currentdate.getMonth()+1)  + "/"
+                + currentdate.getFullYear() + " "
+                + currentdate.getHours() + ":"
+                + currentdate.getMinutes() + ":"
+                + currentdate.getSeconds();
+    }
 
     var loading = {
         show: function() {

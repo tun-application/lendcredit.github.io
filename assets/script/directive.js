@@ -1,3 +1,27 @@
+app.filter('reverse', function() {
+    return function(items) {
+        return items.slice().reverse();
+    };
+});
+
+
+app.directive('format', ['$filter', function($filter) {
+    return {
+        require: '?ngModel',
+        link: function(scope, elem, attrs, ctrl) {
+            if (!ctrl) return;
+            ctrl.$formatters.unshift(function(a) {
+                return $filter(attrs.format)(ctrl.$modelValue)
+            });
+            ctrl.$parsers.unshift(function(viewValue) {
+                var plainNumber = viewValue.replace(/[^\d|\-+|\.+]/g, '');
+                elem.val($filter(attrs.format)(plainNumber));
+                return plainNumber;
+            });
+        }
+    };
+}]);
+
 app.directive('ngEnter', function() {
     return function(scope, element, attrs) {
         element.bind("keydown keypress", function(event) {
@@ -47,7 +71,7 @@ app.service('Notify', function () {
             timer: 1000,
             placement: {
                 from: 'bottom',
-                align: 'center',
+                align: 'right',
             }
         });
     };

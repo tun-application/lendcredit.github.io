@@ -1,0 +1,21 @@
+<div class="col-md-6">
+    <form action="" method="POST" role="form">
+
+        <div class="form-group">
+            <label for="">Tổng số tiền vay (vnd)</label>
+            <input type="text" class="form-control border-input" format="number" ng-model="lend.totalMoney">
+        </div>
+
+        <div class="form-group">
+            <label for="">Thời hạn vay (tháng)</label>
+            <input type="text" class="form-control border-input" format="number" ng-model="lend.totalMonth">
+        </div>
+
+        <div class="form-group">
+            <label for="">Lãi suất (%)</label>
+            <input type="text" class="form-control border-input" format="number" ng-model="lend.percent">
+        </div>
+
+        <button type="button" class="btn btn-info btn-fill btn-wd" ng-click="calculate()">Xem bảng trả góp</button>
+    </form>
+</div>

@@ -25,7 +25,7 @@
                 <a href="/" class="simple-text">Credit Panel</a>
             </div>
             <ul class="nav">
-                <li class="active">
+                <li>
                     <a href="/">
                         <i class="ti-headphone-alt"></i>
                         <p>Đăng ký tư vấn</p>
@@ -57,7 +57,7 @@
                         <span class="icon-bar bar2"></span>
                         <span class="icon-bar bar3"></span>
                     </button>
-                    <a class="navbar-brand" href="/">Đăng ký tư vấn</a>
+                    <a class="navbar-brand" href="/">Khách hàng đang chờ tư vấn</a>
                 </div>
                 <div class="collapse navbar-collapse"><!--side bar--></div>
             </div>
@@ -69,36 +69,31 @@
                     <div class="row">
                         <div class="col-md-8">
                             <div class="header">
-                                <h4 class="title">Vay tín chấp</h4><br>
-                                <p class="category">Bạn đang có nhu cầu tài chính mà không thể yêu cầu giúp đỡ từ bạn bè hay người thân, chúng tôi hỗ trợ vay tín chấp ngân hàng tại 53 tỉnh thành trên cả nước, số tiền vay lên đến 500 triệu, lãi suất thấp nhất tính theo dư nợ giảm dần. Hộ khẩu tỉnh nào cũng vay, bảo mật thông tin khách hàng. <br></p>
+                                <h5 class="title">Danh sách khách hàng đang chờ tư vấn</h5><br>
                             </div>
-                            <div class="content" style="font-size: 15px">
-                                <h5>Vay tín chấp ngân hàng có những ưu việt</h5>
-                                ✔ Giải ngân nhanh.<br>
-                                ✔ Lãi suất khá mềm và có nhiều sự lựa chọn cho khách hàng.<br>
-                                ✔ Bảo mật thông tin khoản vay  tốt.<br>
-                                ✔ Không cần thế chấp bất kì tài sản nào cũng như giấy tờ gốc của khách hàng.<br>
-                                ✔ Các thủ tục nhanh gọn ko rườm rà.<br>
-                                ✔ Không cần vợ hoặc chồng cùng kí tên vay vốn đối với ngân hàng.<br>
-                                ✔ Không mất bất kì 1 loại phụ phí nào kèm theo ( so với đi vay thế chấp tài sản ).<br>
-                                ✔ Khoản vay được phê duyệt lên đến 500tr và thời gian vay 60 tháng.<br>
-                                ✔ Các hình thức cho vay khá đa dạng và phù hợp với nhiều tầng lớp khác nhau.<br>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="row">
-                        <div class="col-md-8">
-                            <div class="header">
-                                <h4 class="title">Đăng ký thông tin tư vấn</h4><br>
-                                <p class="category">Bạn có thể <a href="/lien-he.html">liên hệ</a> trực tiếp đến chúng tôi hoặc vui lòng để lại thông tin dưới đây để nhận được sự tư vấn.</p>
-                            </div>
-                            <div class="content">
-                                <h5>Hotline 0981805006 hoặc 0937431936</h5>
-                                <div class="row">
-                                    <div ng-include="'/template/register.html'"></div>
-                                </div>
+                            <div class="content table-responsive table-full-width">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <th><strong>Họ tên</strong></th>
+                                        <th><strong>Mức lương</strong></th>
+                                        <th><strong>Địa chỉ</strong></th>
+                                        <th><strong>Hình thức nhận lương</strong></th>
+                                        <th><strong>Ngày đăng ký</strong></th>
+                                        <th><strong>Tình trạng</strong></th>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="item in waiting | reverse">
+                                            <td>{{ item.fullname }}</td>
+                                            <td>{{ item.salary | number }}</td>
+                                            <td>{{ item.address }}</td>
+                                            <td>{{ item.typeReceive === 1 ? 'Chuyển khoản qua ngân hàng' : 'Nhận tiền mặt' }}</td>
+                                            <td>{{ item.date }}</td>
+                                            <td>
+                                                <a href="javascript:;" ng-click="updateStatus(item.$id)">{{ item.called ? 'Đã tư vấn' : 'Chưa tư vấn' }}</a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>

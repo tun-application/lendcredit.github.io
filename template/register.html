@@ -2,20 +2,26 @@
     <form action="" method="POST" role="form">
 
         <div class="form-group">
-            <label for="">Tài khoản email</label>
-            <input type="text" class="form-control border-input" ng-model="user.email">
+            <label for="">Họ và tên</label>
+            <input type="text" class="form-control border-input" ng-model="user.fullname">
         </div>
 
         <div class="form-group">
-            <label for="">Mật khẩu</label>
-            <input type="password" class="form-control border-input" ng-model="user.password">
+            <label for="">Bạn đang sinh sống ở đâu</label>
+            <input type="text" class="form-control border-input" ng-model="user.address">
         </div>
 
         <div class="form-group">
-            <label for="">Nhập lại mật khẩu</label>
-            <input type="password" class="form-control border-input" ng-model="user.rePassword">
+            <label for="">Mức thu nhập của bạn</label>
+            <input type="text" class="form-control border-input" format="number" ng-model="user.salary">
         </div>
 
+        <div class="form-group">
+            <label for="">Hình thức nhận lương</label>
+            <select name="" id="input" class="form-control border-input" ng-model="user.typeReceive">
+                <option ng-repeat="item in typeReceive" value="{{ item.id }}">{{ item.name }}</option>
+            </select>
+        </div>
 
         <button type="button" class="btn btn-info btn-fill btn-wd" ng-click="register()">Đăng ký</button>
     </form>
