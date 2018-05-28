@@ -84,7 +84,7 @@ app.service('Notify', function () {
             timer: 1000,
             placement: {
                 from: 'bottom',
-                align: 'center',
+                align: 'right',
             }
         });
     };
@@ -97,7 +97,7 @@ app.service('Notify', function () {
             timer: 1000,
             placement: {
                 from: 'bottom',
-                align: 'center',
+                align: 'right',
             }
         });
     };
