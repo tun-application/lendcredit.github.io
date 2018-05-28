@@ -37,11 +37,11 @@ app.controller('controller', function (
 
     $scope.calculate = function()
     {
-        $scope.tableLend = [];
-        var totalMoney = $scope.lend.totalMoney;
+        $scope.tableLend  = [];
+        var totalMoney    = $scope.lend.totalMoney;
         var goc_moi_thang = Math.round(totalMoney / $scope.lend.totalMonth);
         var lai_moi_thang = Math.round(totalMoney * ($scope.lend.percent / 100) / $scope.lend.totalMonth);
-        totalMoney = totalMoney - goc_moi_thang;
+        totalMoney        = totalMoney - goc_moi_thang;
 
         $scope.tableLend.push({
             ky: 'Kỳ thứ 1',
