@@ -22,7 +22,7 @@
     <div class="sidebar" data-background-color="white" data-active-color="danger">
         <div class="sidebar-wrapper">
             <div class="logo">
-                <a href="/" class="simple-text">Credit Panel</a>
+                <a href="/" class="simple-text"><span style="color: #4dc26b; font-weight: bold;">Credit</span> <strong>Panel</strong></a>
             </div>
             <ul class="nav">
                 <li>
@@ -75,6 +75,7 @@
                                 <table class="table table-striped">
                                     <thead>
                                         <th><strong>Họ tên</strong></th>
+                                        <th><strong>Số điện thoại</strong></th>
                                         <th><strong>Mức lương</strong></th>
                                         <th><strong>Địa chỉ</strong></th>
                                         <th><strong>Hình thức nhận lương</strong></th>
@@ -84,9 +85,10 @@
                                     <tbody>
                                         <tr ng-repeat="item in waiting | reverse">
                                             <td>{{ item.fullname }}</td>
+                                            <td>{{ item.phone }}</td>
                                             <td>{{ item.salary | number }}</td>
                                             <td>{{ item.address }}</td>
-                                            <td>{{ item.typeReceive === 1 ? 'Chuyển khoản qua ngân hàng' : 'Nhận tiền mặt' }}</td>
+                                            <td>{{ item.typeReceive == 1 ? 'Chuyển khoản qua ngân hàng' : 'Nhận tiền mặt' }}</td>
                                             <td>{{ item.date }}</td>
                                             <td>
                                                 <a href="javascript:;" ng-click="updateStatus(item.$id)">{{ item.called ? 'Đã tư vấn' : 'Chưa tư vấn' }}</a>
