@@ -76,9 +76,9 @@
                                     <thead>
                                         <th><strong>Họ tên</strong></th>
                                         <th><strong>Số điện thoại</strong></th>
-                                        <th><strong>Mức lương</strong></th>
+                                        <!-- <th><strong>Mức lương</strong></th> -->
                                         <th><strong>Địa chỉ</strong></th>
-                                        <th><strong>Hình thức nhận lương</strong></th>
+                                        <!-- <th><strong>Hình thức nhận lương</strong></th> -->
                                         <th><strong>Ngày đăng ký</strong></th>
                                         <th><strong>Tình trạng</strong></th>
                                     </thead>
@@ -86,9 +86,9 @@
                                         <tr ng-repeat="item in waiting | reverse">
                                             <td>{{ item.fullname }}</td>
                                             <td>{{ item.phone }}</td>
-                                            <td>{{ item.salary | number }}</td>
+                                            <!-- <td>{{ item.salary | number }}</td> -->
                                             <td>{{ item.address }}</td>
-                                            <td>{{ item.typeReceive == 1 ? 'Chuyển khoản qua ngân hàng' : 'Nhận tiền mặt' }}</td>
+                                            <!-- <td>{{ item.typeReceive == 1 ? 'Chuyển khoản qua ngân hàng' : 'Nhận tiền mặt' }}</td> -->
                                             <td>{{ item.date }}</td>
                                             <td>
                                                 <a href="javascript:;" ng-click="updateStatus(item.$id)">{{ item.called ? 'Đã tư vấn' : 'Chưa tư vấn' }}</a>

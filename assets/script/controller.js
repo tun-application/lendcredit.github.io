@@ -19,7 +19,8 @@ app.controller('controller', function (
 
     $scope.register = function()
     {
-        if (! $scope.user.fullname || ! $scope.user.phone || ! $scope.user.address || ! $scope.user.salary || ! $scope.user.typeReceive) {
+        // if (! $scope.user.fullname || ! $scope.user.phone || ! $scope.user.address || ! $scope.user.salary || ! $scope.user.typeReceive) {
+        if (! $scope.user.fullname || ! $scope.user.phone || ! $scope.user.address) {
             return Notify.error('Vui lòng nhập đầy đủ các thông tin bên dưới.');
         }
         $scope.user.called = false;
