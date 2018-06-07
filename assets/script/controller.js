@@ -17,6 +17,58 @@ app.controller('controller', function (
         { id: 2, name: 'Nhận tiền mặt' }
     ];
 
+    var today = new Date().getDay();
+    switch (today) {
+        case 0: // chu nhat
+            $scope.hotlineCal1 = '0937431936';
+            $scope.hotlineDis1 = '0937.431.936';
+            $scope.hotlineCal2 = '0981805006';
+            $scope.hotlineDis2 = '0981.805.006';
+            break;
+        case 1: // thu hai
+            $scope.hotlineCal2 = '0937431936';
+            $scope.hotlineDis2 = '0937.431.936';
+            $scope.hotlineCal1 = '0981805006';
+            $scope.hotlineDis1 = '0981.805.006';
+            break;
+        case 2: // thu ba
+            $scope.hotlineCal1 = '0937431936';
+            $scope.hotlineDis1 = '0937.431.936';
+            $scope.hotlineCal2 = '0981805006';
+            $scope.hotlineDis2 = '0981.805.006';
+            break;
+        case 3: // thu tu
+            $scope.hotlineCal2 = '0937431936';
+            $scope.hotlineDis2 = '0937.431.936';
+            $scope.hotlineCal1 = '0981805006';
+            $scope.hotlineDis1 = '0981.805.006';
+            break;
+        case 4: // thu nam
+            $scope.hotlineCal1 = '0937431936';
+            $scope.hotlineDis1 = '0937.431.936';
+            $scope.hotlineCal2 = '0981805006';
+            $scope.hotlineDis2 = '0981.805.006';
+            break;
+        case 5: // thu sau
+            $scope.hotlineCal2 = '0937431936';
+            $scope.hotlineDis2 = '0937.431.936';
+            $scope.hotlineCal1 = '0981805006';
+            $scope.hotlineDis1 = '0981.805.006';
+            break;
+        case 6: // thu bay
+            $scope.hotlineCal1 = '0937431936';
+            $scope.hotlineDis1 = '0937.431.936';
+            $scope.hotlineCal2 = '0981805006';
+            $scope.hotlineDis2 = '0981.805.006';
+            break;
+        default:
+            $scope.hotlineCal2 = '0937431936';
+            $scope.hotlineDis2 = '0937.431.936';
+            $scope.hotlineCal1 = '0981805006';
+            $scope.hotlineDis1 = '0981.805.006';
+            break;
+    }
+
     $scope.register = function()
     {
         // if (! $scope.user.fullname || ! $scope.user.phone || ! $scope.user.address || ! $scope.user.salary || ! $scope.user.typeReceive) {
