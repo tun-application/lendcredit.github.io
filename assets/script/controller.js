@@ -16,6 +16,12 @@ app.controller('controller', function (
         { id: 1, name: 'Chuyển khoản qua ngân hàng' },
         { id: 2, name: 'Nhận tiền mặt' }
     ];
+    
+    $scope.address  = [
+        { id: "TP Hồ Chí Minh", name: "TP Hồ Chí Minh" },
+        { id: "Hà Nội", name: "Hà Nội" },
+        { id: "Bình Dương", name: "Bình Dương" },
+    ];
 
     $scope.register = function()
     {
