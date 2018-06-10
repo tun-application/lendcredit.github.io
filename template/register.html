@@ -13,7 +13,9 @@
 
         <div class="form-group">
             <label for="">Bạn đang sinh sống ở đâu</label>
-            <input type="text" class="form-control border-input" ng-model="user.address">
+            <select class="form-control border-input" ng-model="user.address">
+                <option ng-repeat="item in address" value="{{ item.id }}">{{ item.name }}</option>
+            </select>
         </div>
 
         <!-- <div class="form-group">
