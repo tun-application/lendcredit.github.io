@@ -16,7 +16,7 @@ app.controller('controller', function (
         { id: 1, name: 'Chuyển khoản qua ngân hàng' },
         { id: 2, name: 'Nhận tiền mặt' }
     ];
-    
+
     $scope.address  = [
         { id: "TP Hồ Chí Minh", name: "TP Hồ Chí Minh" },
         { id: "Hà Nội", name: "Hà Nội" },
@@ -25,12 +25,16 @@ app.controller('controller', function (
 
     $scope.register = function()
     {
-        // if (! $scope.user.fullname || ! $scope.user.phone || ! $scope.user.address || ! $scope.user.salary || ! $scope.user.typeReceive) {
-        if (! $scope.user.fullname || ! $scope.user.phone || ! $scope.user.address) {
+        if (! $scope.user.fullname ||
+                ! $scope.user.phone ||
+                ! $scope.user.address ||
+                ! $scope.user.salary ||
+                ! $scope.user.typeReceive) {
             return Notify.error('Vui lòng nhập đầy đủ các thông tin bên dưới.');
         }
         $scope.user.called = false;
         $scope.user.date   = now();
+        $scope.user.note   = '';
         loading.show();
         $scope.waiting.$add($scope.user);
         loading.hide();
@@ -42,6 +46,13 @@ app.controller('controller', function (
     {
         var index                    = indexOfArr(id);
         $scope.waiting[index].called = $scope.waiting[index].called ? false : true;
+        $scope.waiting.$save(index);
+    };
+
+    $scope.updateNote = function(id, str)
+    {
+        var index                    = indexOfArr(id);
+        $scope.waiting[index].note = str;
         $scope.waiting.$save(index);
     };
 
